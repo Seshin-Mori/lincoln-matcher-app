@@ -4,3 +4,10 @@ node_modules
 .next/
 out/
 .DS_Store
+firestore.rules
+.firebase/hosting.cHVibGlj.cache
+firestore.indexes.json
+firebase.json
+.firebaserc
+public/
+デプロイ手順_必ず確認.md
