@@ -1,0 +1,6 @@
+lincoln-matcher.md
+node_modules
+.env.local
+.next/
+out/
+.DS_Store
