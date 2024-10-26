@@ -135,7 +135,9 @@ export const approveAnswer = async (
 
       if (!topicDoc.exists()) {
         console.error(`Topic not found with ID: ${topicId}`);
-        throw new Error(`お題が見つかりません（ID: ${topicId}）`);
+        // トピックが見つからない場合はトップページにリダイレクト
+        router.push("/");
+        return; // 処理を終了
       }
 
       if (!answerDoc.exists()) {
@@ -167,8 +169,8 @@ export const approveAnswer = async (
       await generateNewTopic();
     });
 
-    // リダイレクトを追加
-    router.push("/"); // トップページにリダイレクト
+    // 正常に承認された場合は、トピック詳細ページにリダイレクト
+    router.push(`/topic/${topicId}`);
   } catch (error) {
     console.error("Error in approveAnswer:", error);
     throw error;
