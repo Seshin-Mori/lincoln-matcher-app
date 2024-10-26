@@ -179,14 +179,15 @@ export const approveAnswer = async (
 const generateNewTopic = async (): Promise<void> => {
   try {
     const phrasesRef = collection(db, "topicPhrases");
-    const q = query(phrasesRef, orderBy("createdAt", "desc"), limit(1));
-    const snapshot = await getDocs(q);
+    const snapshot = await getDocs(phrasesRef);
 
     if (snapshot.empty) {
       throw new Error("お題フレーズが登録されていません");
     }
 
-    const phraseDoc = snapshot.docs[0];
+    // フレーズの中からランダムに1つ選ぶ
+    const randomIndex = Math.floor(Math.random() * snapshot.docs.length);
+    const phraseDoc = snapshot.docs[randomIndex];
     const topicPhrase = phraseDoc.data().phrase;
 
     // 一時的にidを設定せずにトピックを作成
